@@ -38,6 +38,15 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _decrementCounter() {
+    setState(() {
+      _counter--;
+    });
+  }
+
+  static const incrementButtonX = -0.9;
+  static const incrementButtonY = 1.0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,11 +68,30 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+      floatingActionButton: Stack(
+        children: <Widget>[
+          Align(
+            alignment: const Alignment(incrementButtonX, incrementButtonY),
+            child: FloatingActionButton(
+                onPressed: _incrementCounter,
+                tooltip: 'Increment',
+                child: const Icon(Icons.add),
+              ),
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: FloatingActionButton.extended(
+              onPressed: _decrementCounter,
+              tooltip: 'Decrement',
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              label: const Text(
+                '-',
+                style: TextStyle(height: 40, fontSize: 40),
+              ),
+            )
+          )
+      ],
+    ),
+    );    // This trailing comma makes auto-formatting nicer for build methods.
   }
 }
