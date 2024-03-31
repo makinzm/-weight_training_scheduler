@@ -29,7 +29,7 @@ void main() {
       expect(find.text('0'), findsNothing);
       expect(find.text('1'), findsOneWidget);
 
-      await tester.tap(find.byIcon(Icons.exposure_minus_1));
+      await tester.tap(find.text("-"));
       await tester.pump();
 
       expect(find.text('0'), findsOneWidget);
