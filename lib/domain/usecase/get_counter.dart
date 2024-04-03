@@ -1,4 +1,4 @@
-import '../entity/counter.dart';
+// import '../entity/counter.dart';
 import '../repository/counter.dart';
 
 class GetCounterUseCase {
@@ -6,7 +6,7 @@ class GetCounterUseCase {
 
   GetCounterUseCase(this.repository);
 
-  Future<Counter> call() async {
+  Future<int> call() async {
     return await repository.getCounter();
   }
 }

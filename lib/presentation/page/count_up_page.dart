@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:weight_training_scheduler/domain/repository/counter.dart';
+import 'package:weight_training_scheduler/domain/usecase/decrement_counter.dart';
+import 'package:weight_training_scheduler/domain/usecase/get_counter.dart';
+import 'package:weight_training_scheduler/domain/usecase/increment_counter.dart';
+import 'package:weight_training_scheduler/infrastructure/repository/counter.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -10,17 +15,36 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  late CounterRepository counter;
+  late int _counter;
+
+  @override
+  void initState() {
+    super.initState();
+    counter = CounterRepositoryImpl();
+    _loadCounter();
+  }
+
+  void _loadCounter() {
+    final getCounterUseCase = GetCounterUseCase(counter);
+    getCounterUseCase().then((value) {
+      setState(() {
+        _counter = value;
+      });
+    });
+  }
 
   void _incrementCounter() {
     setState(() {
-      _counter++;
+      final incrementCounterUseCase = IncrementCounterUseCase(counter);
+      incrementCounterUseCase();
     });
   }
 
   void _decrementCounter() {
     setState(() {
-      _counter--;
+      final func = DecrementCounterUseCase(counter);
+      func();
     });
   }
 
