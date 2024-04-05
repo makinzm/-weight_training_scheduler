@@ -6,6 +6,6 @@ class DecrementCounterUseCase {
   DecrementCounterUseCase(this.repository);
 
   Future<void> call() async {
-    await repository.incrementCounter();
+    await repository.decrementCounter();
   }
 }

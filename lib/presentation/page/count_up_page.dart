@@ -38,6 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       final incrementCounterUseCase = IncrementCounterUseCase(counter);
       incrementCounterUseCase();
+      _loadCounter();
     });
   }
 
@@ -45,6 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       final func = DecrementCounterUseCase(counter);
       func();
+      _loadCounter();
     });
   }
 
